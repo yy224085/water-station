@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>محطة تحلية المياه</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+  <h1>💧 محطة تحلية المياه</h1>
+  <div style="display:flex; align-items:center; gap:12px;">
+    <button onclick="toggleTheme()" class="theme-btn" id="theme-btn">☀️</button>
+    <button onclick="exportToExcel()" class="export-btn">📥 تصدير Excel</button>
+    <div id="connection-status" class="status-offline">⚫ غير متصل</div>
+  </div>
+</header>
+
+  <!-- تنبيهات النظام -->
+  <div id="alerts-wrapper">
+    <div id="alerts-header">
+      <span>🔔 تنبيهات النظام</span>
+      <button onclick="clearAlerts()">مسح الكل</button>
+    </div>
+    <div id="alerts-container"></div>
+  </div>
+
+  <main>
+
+    <!-- الحساسات -->
+    <section class="card">
+      <h2>🔵 حالة الخزانات</h2>
+      <div class="sensors-grid">
+        <div class="sensor-item" id="sensor-j0">
+          <span class="sensor-name">J0 — خزان 1 دخل</span>
+          <span class="sensor-value">--</span>
+        </div>
+        <div class="sensor-item" id="sensor-j2">
+          <span class="sensor-name">J2 — خزان 2</span>
+          <span class="sensor-value">--</span>
+        </div>
+        <div class="sensor-item" id="sensor-j4">
+          <span class="sensor-name">J4 — خزان 3 دخل</span>
+          <span class="sensor-value">--</span>
+        </div>
+        <div class="sensor-item" id="sensor-j1">
+          <span class="sensor-name">J1 — خزان 1 خرج</span>
+          <span class="sensor-value">--</span>
+        </div>
+        <div class="sensor-item" id="sensor-j3">
+          <span class="sensor-name">J3 — خزان 2 خرج</span>
+          <span class="sensor-value">--</span>
+        </div>
+        <div class="sensor-item" id="sensor-j5">
+          <span class="sensor-name">J5 — خزان 3 خرج</span>
+          <span class="sensor-value">--</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- المضخات -->
+    <section class="card">
+      <h2>⚙️ المضخات</h2>
+      <div class="pumps-grid">
+        <div class="pump-item" id="pump-j18">
+          <span class="pump-name">P1 — j18</span>
+          <span class="pump-status off">متوقفة</span>
+        </div>
+        <div class="pump-item" id="pump-j19">
+          <span class="pump-name">P2 — j19</span>
+          <span class="pump-status off">متوقفة</span>
+        </div>
+        <div class="pump-item" id="pump-j20">
+          <span class="pump-name">P3 — j20</span>
+          <span class="pump-status off">متوقفة</span>
+        </div>
+        <div class="pump-item" id="pump-j21">
+          <span class="pump-name">P4 Booster — j21</span>
+          <span class="pump-status off">متوقفة</span>
+        </div>
+        <div class="pump-item" id="pump-j22">
+          <span class="pump-name">P5 — j22</span>
+          <span class="pump-status off">متوقفة</span>
+        </div>
+        <div class="pump-item" id="pump-j23">
+          <span class="pump-name">P6 — j23</span>
+          <span class="pump-status off">متوقفة</span>
+        </div>
+        <div class="pump-item" id="pump-j24">
+          <span class="pump-name">P7 — j24</span>
+          <span class="pump-status off">متوقفة</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- رسوم بيانية -->
+    <section class="card">
+      <h2>📊 رسوم بيانية</h2>
+      <div class="charts-grid">
+        <div class="chart-box">
+          <h3>حالة الخزانات</h3>
+          <canvas id="sensor-chart"></canvas>
+        </div>
+        <div class="chart-box">
+          <h3>حالة المضخات</h3>
+          <canvas id="pump-chart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- سجل الأحداث -->
+    <section class="card">
+      <h2>📋 سجل الأحداث</h2>
+      <div id="event-log">
+        <p class="log-item">النظام جاهز...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="js/alerts.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
