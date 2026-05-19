@@ -28,13 +28,13 @@ app.post('/api/esp32/data', (req, res) => {
 
   try {
     if (data.type === 'pump') {
-      db.run('INSERT INTO pump_logs (pump, status) VALUES (?, ?)',
-        [data.name, data.status]);
+      db.prepare('INSERT INTO pump_logs (pump, status) VALUES (?, ?)')
+        .run(data.name, data.status);
       io.emit('pump_update', { pump: data.name, status: data.status });
     }
     else if (data.type === 'sensor') {
-      db.run('INSERT INTO sensor_logs (sensor, value) VALUES (?, ?)',
-        [data.name, data.value]);
+      db.prepare('INSERT INTO sensor_logs (sensor, value) VALUES (?, ?)')
+        .run(data.name, data.value);
       io.emit('sensor_update', { sensor: data.name, value: data.value });
     }
     else if (data.type === 'event') {
